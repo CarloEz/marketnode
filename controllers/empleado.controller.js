@@ -29,4 +29,15 @@ ctrl.delete = async (req, res) => {
     res.status(200).json(result);
 }
 
+ctrl.login=async(req,res)=>{
+    const sql=`Select Id_Empleado,NombreEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
+    let result=await getquery(sql);
+    
+    if(result.length>0){    
+        res.status(200).json(result[0]);
+    }else{
+        res.status(400).json({res:'Vuelva intentarlo'})
+    }
+}
+
 module.exports = ctrl;

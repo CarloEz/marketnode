@@ -5,5 +5,7 @@ router.post('/',ctrl.saveEmp);
 
 router.delete('/:id',ctrl.delete);
 
+router.post('/login',ctrl.login);
+
 
 module.exports=router;

@@ -44,7 +44,6 @@ ctrl.delete=async(req,res)=>{
 ctrl.login=async(req,res)=>{
     const sql=`Select Id_Cliente,NombreCliente From Clientes WHERE CorreoCliente=\'${req.body.correo}\' && PasswordCliente=\'${req.body.pass}\'`
     let result=await getquery(sql);
-    console.log(result);
     
     if(result.length>0){    
         res.status(200).json(result[0]);
