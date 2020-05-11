@@ -54,6 +54,7 @@ ctrl.login=async(req,res)=>{
 }
 
 ctrl.data= async(req,res)=>{
+    //Data
     const sql=`Select * From DATA`;
     let result=await getquery(sql);
     res.status(200).json(result);
