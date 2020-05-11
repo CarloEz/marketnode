@@ -41,11 +41,8 @@ ctrl.save=async(req,res)=>{
 
 ctrl.search=async(req,res)=>{
     //Cambiar por producto:nameproduct
-
-    console.log(req.params.term);
     let save=`SELECT * FROM Empleados WHERE NombreEmpleado LIKE \'${req.params.term}%\'`;
     const result= await getquery(save);
-    console.log(result);
     res.status(200).json(result);
 }
 

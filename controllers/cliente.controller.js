@@ -53,4 +53,10 @@ ctrl.login=async(req,res)=>{
     }
 }
 
+ctrl.data= async(req,res)=>{
+    const sql=`Select * From DATA`;
+    let result=await getquery(sql);
+    res.status(200).json(result);
+}
+
 module.exports=ctrl;
