@@ -36,7 +36,7 @@ ctrl.login=async(req,res)=>{
     if(result.length>0){    
         res.status(200).json(result[0]);
     }else{
-        res.status(400).json({res:'Vuelva intentarlo'})
+        res.status(200).json({res:'Vuelva intentarlo'})
     }
 }
 

@@ -11,7 +11,7 @@ let getquery=async(query,parameters=null)=>{
         return result;
     }
     catch(err){
-        console.log(err);
+        return err;
     }
 }
 //CATEGORIA PRODUCTOS
@@ -30,18 +30,19 @@ ctrl.deleteCat=async(req,res)=>{
 
 ctrl.getCat=async(req,res)=>{
     //Falta llamar al procedimiento.
-    let sql='CALL EliminarCategoriaProducto(?)';
-    let result=await getquery(sql,req.params.id);
+    let sql='Select * from CategoriaProducto';
+    let result=await getquery(sql);
     res.status(200).json({res:result});
 }
 
-ctrl.getProducts=async(req,res)=>{
-  let sql='Select * from Producto';
-  let result= await getquery(sql);
-  res.status(200).json({res:result});   
-}
 
 //PRODUCTOS
+
+ctrl.getProducts=async(req,res)=>{
+    let sql='Select * from Producto';
+    let result= await getquery(sql);
+    res.status(200).json({res:result});   
+  }
 
 ctrl.addProd=async(req,res)=>{
     req.body.cantidad
@@ -78,9 +79,17 @@ ctrl.searchProd=async(req,res)=>{
 
 //PROVEEDORES
 ctrl.saveProv=async(req,res)=>{
-    let sql='CALL (?)';
-    let result=await getquery(sql,req.params.id);
+    let sql='Insert into Proveedor(NombreProveedor,ApellidoProveedor,CorreoProveedor,TelefonoProveedor,NitProveedor,EliminarProveedor) values(?,?,?,?,?,?)';
+    let parameters=[req.body.name,req.body.secname,req.body.correo,req.body.tel,req.body.nit,0];
+    let result=await getquery(sql,parameters);
     res.status(200).json({res:result});
+}
+
+ctrl.getProv= async(req,res)=>{
+    let sql='Select * from Proveedor';
+    let result= await getquery(sql);
+
+    res.json({res:result});
 }
 
 module.exports=ctrl;
