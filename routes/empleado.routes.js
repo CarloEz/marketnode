@@ -7,6 +7,6 @@ router.delete('/:id',ctrl.delete);
 
 router.post('/login',ctrl.login);
 
-router.get('/cantidad',ctrl.contEmp);
+router.get('/countEmpleados',ctrl.cantidadEmp);
 
 module.exports=router;

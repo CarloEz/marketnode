@@ -9,7 +9,7 @@ router.delete('/delete/categoria/:id',ctrl.deleteCat);
 router.get('/cat',ctrl.getCat);
 
 //PRODUCTOS
-router.get('/exist',ctrl.cantidadProducts);
+router.get('/count',ctrl.cantidadProducts);
 router.post('/existencia/add',ctrl.addProd);
 router.post('/existencia/del',ctrl.deleteProd);
 router.post('/',upload.single('img'),ctrl.save);

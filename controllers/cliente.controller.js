@@ -14,12 +14,12 @@ let getquery=async(query,parameters=null)=>{
     }
 }
 
-ctrl.contCliente= async(req,res)=>{
-    let sql='Select count(NombreCliente) as cantidad from Clientes';
-    let result=await getquery(sql); 
-    res.json({res:result});
+ctrl.cantidadClientes= async(req,res)=>{
+    let sql='SELECT COUNT(NombreCliente) as numero from Clientes';
+    let result=await getquery(sql);
+    console.log(result);
+    res.json(result[0]);
 }
-
 
 ctrl.saveTipo=async(req,res)=>{   
     let sql= `CALL RegistrarTiposDeClientes(?,?)`;

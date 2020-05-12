@@ -11,6 +11,6 @@ router.post('/login',ctrl.login);
 
 router.get('/data',ctrl.data);
 
-router.get('/cantidadCliente',ctrl.contCliente);
+router.get('/countCliente',ctrl.cantidadClientes);
 
 module.exports=router;

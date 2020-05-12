@@ -12,13 +12,10 @@ let getquery = async (query, parameters = null) => {
         console.log(err);
     }
 }
-
-ctrl.contEmp= async(req,res)=>{
-    let sql='Select count(NombreEmpleado) as \'cantidad\' from Empleados';
-    let result=await getquery(sql); 
-    if(!result.errno){
-        res.json({res:result});
-    }
+ctrl.cantidadEmp= async(req,res)=>{
+    let sql='SELECT COUNT(NombreEmpleado) as numero from Empleados';
+    let result=await getquery(sql);
+    res.json(result[0]);
 }
 
 ctrl.saveEmp = async (req, res) => {
