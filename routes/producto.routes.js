@@ -15,10 +15,12 @@ router.post('/existencia/del',ctrl.deleteProd);
 router.post('/',upload.single('img'),ctrl.save);
 router.get('/:term',ctrl.searchProd);
 router.get('/',ctrl.getProducts);
+router.delete('/delete/:id',ctrl.delete);
 
 //PROVEEDOR
 router.post('/proveedor',ctrl.saveProv);
 router.get('/proveedores',ctrl.getProv);
 router.get('/proveedores/count',ctrl.cantidadProveedores);
+router.delete('/proveedores/:id',ctrl.deleteProv);
 
 module.exports=router;

@@ -37,13 +37,13 @@ ctrl.getCat=async(req,res)=>{
 
 //PRODUCTOS
 ctrl.cantidadProducts= async(req,res)=>{
-    let sql='SELECT COUNT(NombreProducto) as numero from Producto';
+    let sql='SELECT COUNT(NombreProducto) as numero from Producto where EliminarProducto=0';
     let result=await getquery(sql);
     res.json(result[0]);
 }
 
 ctrl.getProducts=async(req,res)=>{
-    let sql='Select * from Producto';
+    let sql='Select * from Producto where EliminarProducto=0';
     let result= await getquery(sql);
     res.status(200).json({res:result});   
 }
@@ -59,6 +59,17 @@ ctrl.deleteProd= async(req,res)=>{
     let sql=`update Producto set ExistenciaProducto=(ExistenciaProducto-${req.body.cantidad}) where NombreProducto=\'${req.body.product}\'`;
     let result= await getquery(sql);
     res.json(result);
+}
+
+ctrl.delete= async(req,res)=>{
+    let sql='Call  EliminaProducto(?)';
+    let result=await getquery(sql,req.params.id);
+
+    if(result.errno){
+        res.json({res:{err:result.errno,descripcion:result.code}})
+    }else{
+        res.json({res:"Producto Eliminado"});
+    }
 }
 
 ctrl.save=async(req,res)=>{
@@ -94,16 +105,26 @@ ctrl.saveProv=async(req,res)=>{
 }
 
 ctrl.getProv= async(req,res)=>{
-    let sql='Select * from Proveedor';
+    let sql='Select * from Proveedor where EliminarProveedor=0';
     let result= await getquery(sql);
-
     res.json({res:result});
 }
 
 ctrl.cantidadProveedores=async(req,res)=>{
-    let sql='SELECT COUNT(NombreProveedor) as numero from Proveedor';
+    let sql='SELECT COUNT(NombreProveedor) as numero from Proveedor where EliminarProveedor=0';
     let result=await getquery(sql);
     res.json(result[0]);
+}
+
+ctrl.deleteProv= async(req,res)=>{
+    let sql='Call EliminarProveedor(?)';
+    let result=await getquery(sql,req.params.id);
+
+    if(result.errno){
+        res.json({res:{err:result.errno,descripcion:result.code}})
+    }else{
+        res.json({res:"Proveedor Eliminado"});
+    }
 }
 
 module.exports=ctrl;
