@@ -19,5 +19,6 @@ router.get('/',ctrl.getProducts);
 //PROVEEDOR
 router.post('/proveedor',ctrl.saveProv);
 router.get('/proveedores',ctrl.getProv);
+router.get('/proveedores/count',ctrl.cantidadProveedores);
 
 module.exports=router;

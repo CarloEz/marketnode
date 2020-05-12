@@ -29,7 +29,7 @@ ctrl.deleteCat=async(req,res)=>{
 }
 
 ctrl.getCat=async(req,res)=>{
-    let sql='Select * from CategoriaProducto';
+    let sql='Select * from CategoriaProducto where EliminarCategoria=0';
     let result=await getquery(sql);
     res.status(200).json({res:result});
 }
@@ -39,10 +39,8 @@ ctrl.getCat=async(req,res)=>{
 ctrl.cantidadProducts= async(req,res)=>{
     let sql='SELECT COUNT(NombreProducto) as numero from Producto';
     let result=await getquery(sql);
-    console.log(result);
     res.json(result[0]);
 }
-
 
 ctrl.getProducts=async(req,res)=>{
     let sql='Select * from Producto';
@@ -52,13 +50,13 @@ ctrl.getProducts=async(req,res)=>{
 
 ctrl.addProd=async(req,res)=>{
     req.body.cantidad
-    let sql=`update Producto set ExistenciaBodega=(ExistenciaBodega+${req.body.cantidad}) where NombreProducto=\'${req.body.product}\'`;
+    let sql=`update Producto set ExistenciaProducto=(ExistenciaProducto+${req.body.cantidad}) where NombreProducto=\'${req.body.product}\'`;
     let result= await getquery(sql);
     res.json(result);
 }
 
 ctrl.deleteProd= async(req,res)=>{
-    let sql=`update Producto set ExistenciaBodega=(ExistenciaBodega-${req.body.cantidad}) where NombreProducto=\'${req.body.product}\'`;
+    let sql=`update Producto set ExistenciaProducto=(ExistenciaProducto-${req.body.cantidad}) where NombreProducto=\'${req.body.product}\'`;
     let result= await getquery(sql);
     res.json(result);
 }
@@ -71,8 +69,8 @@ ctrl.save=async(req,res)=>{
         fs.renameSync(req.file.path, './public/products/' + Imgname);
     }
 
-    let sql=`Insert into Producto(Id_Empleado,Id_CategoriaProducto,Imagen,NombreProducto,PrecioVentaUnidad,PrecioVentaMayoreo,MarcaProducto,PrecioCostoProducto,Descripcion,ExistenciaBodega,Vencidos,Presentacion,UnidadMedida,EliminarProducto) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-    let parameters=[req.body.idemp,req.body.idcat,Imgname,req.body.producto,req.body.venta,req.body.ventamayoreo,req.body.marca,req.body.costo,req.body.descripcion,req.body.cantidad,req.body.vencidos,req.body.presentacion,req.body.unidadMedida,0];
+    let sql=`Insert into Producto(Id_Empleado,Id_CategoriaProducto,Imagen,NombreProducto,Precio,Costo,MarcaProducto,Descripcion,ExistenciaProducto,Vencidos,Presentacion,UnidadMedida,EliminarProducto) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    let parameters=[req.body.idemp,req.body.idcat,Imgname,req.body.producto,req.body.precio,req.body.costo,req.body.marca,req.body.descripcion,req.body.cantidad,req.body.vencidos,req.body.presentacion,req.body.unidadMedida,0];
     let result=await getquery(sql,parameters);
     if(result.errno){
         res.json({res:{error:result.errno,desc:result.code}})
@@ -100,6 +98,12 @@ ctrl.getProv= async(req,res)=>{
     let result= await getquery(sql);
 
     res.json({res:result});
+}
+
+ctrl.cantidadProveedores=async(req,res)=>{
+    let sql='SELECT COUNT(NombreProveedor) as numero from Proveedor';
+    let result=await getquery(sql);
+    res.json(result[0]);
 }
 
 module.exports=ctrl;
