@@ -9,11 +9,11 @@ dotenv.config();
 app.use(cors({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/public',express.static('public'));
 
 app.use('/api/empleados',require('./routes/empleado.routes.js'));
 app.use('/api/productos',require('./routes/producto.routes.js'));
 app.use('/api/clientes',require('./routes/cliente.routes.js'));
-
 
 app.listen(port,()=>{
     console.log("servidor coriendo :V")
