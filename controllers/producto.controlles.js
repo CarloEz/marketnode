@@ -29,7 +29,6 @@ ctrl.deleteCat=async(req,res)=>{
 }
 
 ctrl.getCat=async(req,res)=>{
-    //Falta llamar al procedimiento.
     let sql='Select * from CategoriaProducto';
     let result=await getquery(sql);
     res.status(200).json({res:result});
@@ -37,19 +36,19 @@ ctrl.getCat=async(req,res)=>{
 
 
 //PRODUCTOS
-ctrl.contProducts= async(req,res)=>{
-    let sql='Select count(NombreProducto) as \'cantidad\' from Producto';
-    let result=await getquery(sql); 
-    if(!result.errno){
-        res.json({res:result});
-    }
+ctrl.cantidadProducts= async(req,res)=>{
+    //let sql=`SELECT COUNT(NombreProducto) FROM Producto`;
+    let sql='select * from Producto';
+    let result=await getquery(sql);
+    console.log('result',result);
+    res.json({res:result});
 }
 
 ctrl.getProducts=async(req,res)=>{
     let sql='Select * from Producto';
     let result= await getquery(sql);
     res.status(200).json({res:result});   
-  }
+}
 
 ctrl.addProd=async(req,res)=>{
     req.body.cantidad
