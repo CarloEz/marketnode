@@ -7,5 +7,6 @@ router.delete('/:id',ctrl.delete);
 
 router.post('/login',ctrl.login);
 
+router.get('/cantidad',ctrl.contEmp);
 
 module.exports=router;

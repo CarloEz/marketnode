@@ -13,6 +13,7 @@ router.post('/existencia/add',ctrl.addProd);
 router.post('/existencia/del',ctrl.deleteProd);
 router.post('/',upload.single('img'),ctrl.save);
 router.get('/:term',ctrl.searchProd);
+router.get('/cantidad',ctrl.contProducts);
 
 //PROVEEDOR
 router.post('/proveedor',ctrl.saveProv);

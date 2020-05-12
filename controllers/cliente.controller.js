@@ -14,6 +14,15 @@ let getquery=async(query,parameters=null)=>{
     }
 }
 
+ctrl.contCliente= async(req,res)=>{
+    let sql='Select count(NombreCliente) as \'cantidad\' from Clientes';
+    let result=await getquery(sql); 
+    if(!result.errno){
+        res.json({res:result});
+    }
+}
+
+
 ctrl.saveTipo=async(req,res)=>{   
     let sql= `CALL RegistrarTiposDeClientes(?,?)`;
     let parameters=[req.body.tipo,0];

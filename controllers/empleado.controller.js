@@ -13,6 +13,13 @@ let getquery = async (query, parameters = null) => {
     }
 }
 
+ctrl.contEmp= async(req,res)=>{
+    let sql='Select count(NombreEmpleado) as \'cantidad\' from Empleados';
+    let result=await getquery(sql); 
+    if(!result.errno){
+        res.json({res:result});
+    }
+}
 
 ctrl.saveEmp = async (req, res) => {
     const sql = 'CALL RegistrarEmpleado(?,?,?,?,?,?,?,?,?)';

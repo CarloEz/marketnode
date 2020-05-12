@@ -37,6 +37,13 @@ ctrl.getCat=async(req,res)=>{
 
 
 //PRODUCTOS
+ctrl.contProducts= async(req,res)=>{
+    let sql='Select count(NombreProducto) as \'cantidad\' from Producto';
+    let result=await getquery(sql); 
+    if(!result.errno){
+        res.json({res:result});
+    }
+}
 
 ctrl.getProducts=async(req,res)=>{
     let sql='Select * from Producto';
@@ -68,7 +75,11 @@ ctrl.save=async(req,res)=>{
     let sql=`Insert into Producto(Id_Empleado,Id_CategoriaProducto,Imagen,NombreProducto,PrecioVentaUnidad,PrecioVentaMayoreo,MarcaProducto,PrecioCostoProducto,Descripcion,ExistenciaBodega,Vencidos,Presentacion,UnidadMedida,EliminarProducto) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     let parameters=[req.body.idemp,req.body.idcat,Imgname,req.body.producto,req.body.venta,req.body.ventamayoreo,req.body.marca,req.body.costo,req.body.descripcion,req.body.cantidad,req.body.vencidos,req.body.presentacion,req.body.unidadMedida,0];
     let result=await getquery(sql,parameters);
-    res.status(200).json({res:result});
+    if(result.errno){
+        res.json({res:{error:result.errno,desc:result.code}})
+    }else{
+        res.status(200).json({res:'Ingresado correctamente'})
+    }
 }
 
 ctrl.searchProd=async(req,res)=>{
