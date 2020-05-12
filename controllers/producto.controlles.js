@@ -37,12 +37,11 @@ ctrl.getCat=async(req,res)=>{
 
 //PRODUCTOS
 ctrl.cantidadProducts= async(req,res)=>{
-    //let sql=`SELECT COUNT(NombreProducto) FROM Producto`;
-    let sql='select * from Producto';
-    let result=await getquery(sql);
-    console.log('result',result);
-    res.json({res:result});
+    let sql='SELECT COUNT(NombreProducto) from Producto';
+    let result=getquery(sql);
+    res.json({res:"JAJAJAJAJAJAJAJA",result:result});
 }
+
 
 ctrl.getProducts=async(req,res)=>{
     let sql='Select * from Producto';

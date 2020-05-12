@@ -9,13 +9,11 @@ router.delete('/delete/categoria/:id',ctrl.deleteCat);
 router.get('/cat',ctrl.getCat);
 
 //PRODUCTOS
+router.get('/exist',ctrl.cantidadProducts);
 router.post('/existencia/add',ctrl.addProd);
 router.post('/existencia/del',ctrl.deleteProd);
 router.post('/',upload.single('img'),ctrl.save);
 router.get('/:term',ctrl.searchProd);
-router.get('/algo/',(req,res)=>{
-    console.log("OK");
-});
 router.get('/',ctrl.getProducts);
 
 //PROVEEDOR

@@ -15,11 +15,9 @@ let getquery=async(query,parameters=null)=>{
 }
 
 ctrl.contCliente= async(req,res)=>{
-    let sql='Select count(NombreCliente) as \'cantidad\' from Clientes';
+    let sql='Select count(NombreCliente) as cantidad from Clientes';
     let result=await getquery(sql); 
-    if(!result.errno){
-        res.json({res:result});
-    }
+    res.json({res:result});
 }
 
 
