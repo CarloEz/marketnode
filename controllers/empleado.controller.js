@@ -34,7 +34,7 @@ ctrl.delete = async (req, res) => {
 }
 
 ctrl.login=async(req,res)=>{
-    const sql=`Select Id_Empleado,NombreEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
+    const sql=`Select Id_Empleado,NombreEmpleado,ApellidoEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
     let result=await getquery(sql);
     
     if(result.length>0){    

@@ -49,7 +49,7 @@ ctrl.delete=async(req,res)=>{
 }
 
 ctrl.login=async(req,res)=>{
-    const sql=`Select Id_Cliente,NombreCliente From Clientes WHERE CorreoCliente=\'${req.body.correo}\' && PasswordCliente=\'${req.body.pass}\'`
+    const sql=`Select Id_Cliente,NombreCliente, ApellidoCliente From Clientes WHERE CorreoCliente=\'${req.body.correo}\' && PasswordCliente=\'${req.body.pass}\'`
     let result=await getquery(sql);
     
     if(result.length>0){    
@@ -57,13 +57,6 @@ ctrl.login=async(req,res)=>{
     }else{
         res.json({res:'Vuelva intentarlo'})
     }
-}
-
-ctrl.data= async(req,res)=>{
-    //Data
-    const sql=`Select * From DATA`;
-    let result=await getquery(sql);
-    res.status(200).json(result);
 }
 
 module.exports=ctrl;

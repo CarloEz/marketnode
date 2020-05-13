@@ -9,8 +9,6 @@ router.delete('/:id',ctrl.delete);
 
 router.post('/login',ctrl.login);
 
-router.get('/data',ctrl.data);
-
 router.get('/countCliente',ctrl.cantidadClientes);
 
 module.exports=router;
