@@ -1,6 +1,7 @@
 const router= require('express').Router();
 const ctrl= require('../controllers/cliente.controller');
 
+router.get('/',ctrl.getClientes);
 router.post('/tipo/',ctrl.saveTipo);
 router.delete('/tipo/:id',ctrl.deleteTipo);
 
@@ -10,6 +11,6 @@ router.delete('/:id',ctrl.delete);
 router.post('/login',ctrl.login);
 
 router.get('/countCliente',ctrl.cantidadClientes);
-router.get('/',ctrl.getClientes);
+
 
 module.exports=router;

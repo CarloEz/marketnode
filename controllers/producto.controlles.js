@@ -103,12 +103,11 @@ ctrl.saveProv=async(req,res)=>{
     res.status(200).json({res:result});
 }
 
-ctrl.getProveedores= async(req,res)=>{
-    const sql='SELECT * FROM Proveedor where EliminarProveedor=0';
-    const result= await getquery(sql);
-    res.json({res:result});
+ctrl.getProveedores=async(req,res)=>{
+    let sql='Select * from Proveedor where EliminarProveedor=0';
+    let result= await getquery(sql);
+    res.json({res:result})
 }
-
 ctrl.cantidadProveedores=async(req,res)=>{
     let sql='SELECT COUNT(NombreProveedor) as numero from Proveedor where EliminarProveedor=0';
     let result=await getquery(sql);

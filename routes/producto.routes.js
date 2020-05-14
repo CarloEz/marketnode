@@ -19,7 +19,7 @@ router.delete('/delete/:id',ctrl.delete);
 
 //PROVEEDOR
 router.post('/proveedor',ctrl.saveProv);
-router.get('/prov/',ctrl.getProveedores);
+router.get('/obteniendo/proveedores',ctrl.getProveedores);
 router.get('/proveedores/count',ctrl.cantidadProveedores);
 router.delete('/proveedores/:id',ctrl.deleteProv);
 
