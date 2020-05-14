@@ -103,10 +103,13 @@ ctrl.saveProv=async(req,res)=>{
     res.status(200).json({res:result});
 }
 
-ctrl.getProv= async(req,res)=>{
-    let sql='SELECT * FROM PuntoVent.Proveedor where EliminarProveedor=\'0\'';
-    let result= await getquery(sql);
-    res.json(result);
+ctrl.getProveedores= async(req,res)=>{
+    console.log('JAJAJAJAJA');    
+    console.log('PRoveedores',result);
+    //let sql='SELECT * FROM PuntoVent.Proveedor where EliminarProveedor=0';
+    //let result= await getquery(sql);
+    //res.json(result);
+    res.json('JAJAJA')
 }
 
 ctrl.cantidadProveedores=async(req,res)=>{
