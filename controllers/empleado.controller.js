@@ -44,4 +44,18 @@ ctrl.login=async(req,res)=>{
     }
 }
 
+ctrl.getEmpleados=async(req,res)=>{
+    let sql='SELECT * from Empleados where EliminarEmpleados=0';
+    let result=await getquery(sql);
+    res.json({res:result});
+}
+
+ctrl.empresa=async(req,res)=>{
+    const sql='CALL RegistrarDatosEmpresa(?,?,?,?,?,?,?)';
+    const parameters=[req.body.nombre,req.body.slogan,req.body.logo,req.body.address,req.body.email,req.body.tel,0];
+
+    const result=await getquery(sql,parameters);
+    res.json({res:'Registrado exitosamente'});
+}
+
 module.exports = ctrl;

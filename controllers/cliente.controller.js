@@ -28,12 +28,17 @@ ctrl.saveTipo=async(req,res)=>{
     res.status(200).json(result);
 }
 
+ctrl.getClientes=async(req,res)=>{
+    let sql='SELECT * from Clientes where EliminarCliente=0';
+    let result=await getquery(sql);
+    res.json({res:result});
+}
+
 ctrl.deleteTipo=async(req,res)=>{   
     let sql= `CALL EliminarTipoDeCliente(?)`;
     const result= await getquery(sql,req.params.id);
     res.status(200).json(result);
 }
-
 
 ctrl.save=async(req,res)=>{
     const sql=`CALL RegistrarCliente(?,?,?,?,?,?,?,?)`;

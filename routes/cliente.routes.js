@@ -10,5 +10,6 @@ router.delete('/:id',ctrl.delete);
 router.post('/login',ctrl.login);
 
 router.get('/countCliente',ctrl.cantidadClientes);
+router.get('/',ctrl.getClientes);
 
 module.exports=router;

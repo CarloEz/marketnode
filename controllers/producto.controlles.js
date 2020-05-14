@@ -34,7 +34,6 @@ ctrl.getCat=async(req,res)=>{
     res.status(200).json({res:result});
 }
 
-
 //PRODUCTOS
 ctrl.cantidadProducts= async(req,res)=>{
     let sql='SELECT COUNT(NombreProducto) as numero from Producto where EliminarProducto=0';
@@ -105,9 +104,9 @@ ctrl.saveProv=async(req,res)=>{
 }
 
 ctrl.getProv= async(req,res)=>{
-    let sql='Select * from Proveedor where EliminarProveedor=0';
+    let sql='SELECT * FROM PuntoVent.Proveedor where EliminarProveedor=\'0\'';
     let result= await getquery(sql);
-    res.json({res:result});
+    res.json(result);
 }
 
 ctrl.cantidadProveedores=async(req,res)=>{

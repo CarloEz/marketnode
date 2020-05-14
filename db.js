@@ -13,5 +13,4 @@ let getConn=async()=>{
     return conn;
 }
 
-
 module.exports.getConn= getConn;
