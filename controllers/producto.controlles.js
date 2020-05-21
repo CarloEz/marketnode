@@ -89,6 +89,17 @@ ctrl.save=async(req,res)=>{
     }
 }
 
+ctrl.saveproducto=async(req,res)=>{
+    let sql=`Insert into Producto(Id_Empleado,Id_CategoriaProducto,Imagen,NombreProducto,Precio,Costo,MarcaProducto,Descripcion,ExistenciaProducto,Vencidos,Presentacion,UnidadMedida,EliminarProducto) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    let parameters=[req.body.idemp,req.body.idcat,req.body.token,req.body.producto,req.body.precio,req.body.costo,req.body.marca,req.body.descripcion,req.body.cantidad,req.body.vencidos,req.body.presentacion,req.body.unidadMedida,0];
+    let result=await getquery(sql,parameters);
+    if(result.errno){
+        res.json({res:{error:"No se pudo registrar el producto",desc:result.code}})
+    }else{
+        res.status(200).json({res:'Ingresado correctamente'})
+    }
+}
+
 ctrl.searchProd=async(req,res)=>{
     let save=`SELECT * FROM Producto WHERE NombreProducto LIKE \'${req.params.term}%\'`;
     const result= await getquery(save);
