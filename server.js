@@ -17,5 +17,5 @@ app.use('/api/clientes',require('./routes/cliente.routes.js'));
 app.use('/api/ventas',require('./routes/ventas.routes.js'));
 
 app.listen(port,()=>{
-    console.log("servidor coriendo :V")
+    console.log("servidor coriendo :V");
 });
