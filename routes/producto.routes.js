@@ -1,7 +1,5 @@
 const router= require('express').Router();
 const ctrl= require('../controllers/producto.controlles');
-const multer= require('multer');
-let upload=multer({dest:'./public/products/'})
 
 //CATEGORIA
 router.post('/cat',ctrl.saveCat);
