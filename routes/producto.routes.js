@@ -12,7 +12,6 @@ router.get('/cat',ctrl.getCat);
 router.get('/count',ctrl.cantidadProducts);
 router.post('/existencia/add',ctrl.addProd);
 router.post('/existencia/del',ctrl.deleteProd);
-router.post('/',upload.single('img'),ctrl.save);
 router.post('/token/',ctrl.saveproducto);
 router.get('/:term',ctrl.searchProd);
 router.get('/',ctrl.getProducts);

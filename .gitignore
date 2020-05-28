@@ -1,7 +1,4 @@
 node_modules
 diagrama
 .env
-ventas.controller.js
-connection.controller.js
-ventas.routes.js
 compras.controller.js

@@ -1,61 +1,60 @@
-const mariadb = require('../db');
+const conn = require('./connection.controller');
 let ctrl = {};
 
-let getquery = async (query, parameters = null) => {
-    try {
-        let conn = await mariadb.getConn();
-        const result = await conn.query(query, parameters);
-        conn.end();
-        return result;
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-ctrl.cantidadEmp= async(req,res)=>{
-    let sql='SELECT COUNT(NombreEmpleado) as numero from Empleados';
-    let result=await getquery(sql);
+ctrl.cantidadEmp = async (req, res) => {
+    let sql = 'SELECT COUNT(NombreEmpleado) as numero from Empleados';
+    let result = await conn.getquery(sql);
     res.json(result[0]);
 }
 
 ctrl.saveEmp = async (req, res) => {
     const sql = 'CALL RegistrarEmpleado(?,?,?,?,?,?,?,?,?)';
-    const parameters = [req.body.nombre, req.body.apellido, req.body.correo,req.body.pass,
+    const parameters = [req.body.nombre, req.body.apellido, req.body.correo, req.body.pass,
     req.body.tel, req.body.nit, req.body.residencia, req.body.tipoEmpleado, 0];
 
-    const result =await getquery(sql, parameters);
+    const result = await conn.getquery(sql, parameters);
     res.status(200).json(result);
+}
+
+ctrl.getEmpresa = async (req, res) => {
+    let sql = 'Select * from DatosEmpresa where Id_DatoEmpresa=1';
+    let result = await conn.getquery(sql);
+    res.json(result);
 }
 
 ctrl.delete = async (req, res) => {
     const sql = 'CALL EliminarEmpleados(?)';
-    const result =await getquery(sql, req.params.id);
+    const result = await conn.getquery(sql, req.params.id);
     res.status(200).json(result);
 }
 
-ctrl.login=async(req,res)=>{
-    const sql=`Select Id_Empleado,NombreEmpleado,ApellidoEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
-    let result=await getquery(sql);
-    
-    if(result.length>0){    
+ctrl.login = async (req, res) => {
+    const sql = `Select Id_Empleado,NombreEmpleado,ApellidoEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
+    let result = await conn.getquery(sql);
+
+    if (result.length > 0) {
         res.status(200).json(result[0]);
-    }else{
-        res.status(200).json({res:'Vuelva intentarlo'})
+    } else {
+        res.status(200).json({ res: 'Vuelva intentarlo' })
     }
 }
 
-ctrl.getEmpleados=async(req,res)=>{
-    let sql='SELECT * from Empleados where EliminarEmpleados=0';
-    let result=await getquery(sql);
-    res.json({res:result});
+ctrl.getEmpleados = async (req, res) => {
+    let sql = 'SELECT * from Empleados where EliminarEmpleados=0';
+    let result = await conn.getquery(sql);
+    res.json({ res: result });
 }
 
-ctrl.empresa=async(req,res)=>{
-    const sql='CALL RegistrarDatosEmpresa(?,?,?,?,?,?,?)';
-    const parameters=[req.body.nombre,req.body.slogan,req.body.logo,req.body.address,req.body.email,req.body.tel,0];
+ctrl.empresa = async (req, res) => {
+    const sql = 'CALL RegistrarDatosEmpresa(?,?,?,?,?,?,?)';
+    const parameters = [req.body.nombre, req.body.slogan, req.body.logo, req.body.address, req.body.email, req.body.tel, 0];
 
-    const result=await getquery(sql,parameters);
-    res.json({res:'Registrado exitosamente'});
+    const result = await conn.getquery(sql, parameters);
+    if (result.errno) {
+        res.json({ res: { error: result.errno, desc: result.code } });
+    } else {
+        res.json({ res: 'Registrado exitosamente' });
+    }
 }
 
 module.exports = ctrl;
