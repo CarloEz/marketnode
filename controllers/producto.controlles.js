@@ -48,7 +48,7 @@ ctrl.deleteProd= async(req,res)=>{
 }
 
 ctrl.delete= async(req,res)=>{
-    let sql='Call  EliminaProducto(?)';
+    let sql='Call  EliminarProducto(?)';
     let result=await conn.getquery(sql,req.params.id);
 
     if(result.errno){

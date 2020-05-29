@@ -1,4 +1,5 @@
 let conn = require('./connection.controller');
+const mod= require('./modificaciones.controller');
 let ctrl = {};
 
 let detalleVenta = async (fila, id_venta) => {
@@ -9,24 +10,12 @@ let detalleVenta = async (fila, id_venta) => {
     if (result.errno) {
         return result;
     } else {
-        return await disminuirProducto(fila);
+        return await mod.disminuirProducto(fila);
     }
-}
-
-let disminuirProducto = async (fila) => {
-    let sql = `update Producto set ExistenciaProducto=(ExistenciaProducto-${fila.cantidad}) where Id_Producto=${fila.id_producto}`;
-    let result = await conn.getquery(sql);
-    return result;
 }
 
 let seleccionarDetalleVenta = async (id_venta) => {
     let sql = `Select * from DetalleVenta where Id_Venta=\'${id_venta}\'`;
-    let result = await conn.getquery(sql);
-    return result;
-}
-
-let aumentarProducto = async (fila) => {
-    let sql = `update Producto set ExistenciaProducto=(ExistenciaProducto+${fila.CantidadProducto}) where Id_Producto=${fila.Id_Producto}`;
     let result = await conn.getquery(sql);
     return result;
 }
@@ -192,7 +181,7 @@ let suprDetalleCompletoVenta = async (id_venta) => {
         return result = { errno: "1", code: "No existe detalle de venta" };
     } else {
         result.forEach(async (fila) => {
-            let result = await aumentarProducto(fila);
+            let result = await mod.aumentarProducto(fila);
             if (result.errno) {
                 return result;
             } else {
