@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const ctrl = require('../controllers/compras.controller');
 
-router.get('/',ctrl.save);
+router.post('/',ctrl.save);
 
 module.exports= router;

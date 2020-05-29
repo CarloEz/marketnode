@@ -14,6 +14,12 @@ ctrl.saveTipo=async(req,res)=>{
     res.status(200).json(result);
 }
 
+ctrl.getTipos=async(req,res)=>{
+    let sql=`Select * from TipoCliente`;
+    let result=await conn.getquery(sql);
+    res.json({res:result});
+}
+
 ctrl.getClientes=async(req,res)=>{
     let sql='SELECT * from Clientes where EliminarCliente=0';
     let result=await conn.getquery(sql);
