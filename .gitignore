@@ -1,6 +1,4 @@
 node_modules
 diagrama
 .env
-compras.controller.js
 public
-compras.routes.js
