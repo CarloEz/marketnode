@@ -31,11 +31,12 @@ ctrl.delete = async (req, res) => {
 ctrl.login = async (req, res) => {
     const sql = `Select Id_Empleado,NombreEmpleado,ApellidoEmpleado From Empleados WHERE CorreoEmpleado=\'${req.body.correo}\' && PasswordEmpleados=\'${req.body.pass}\'`
     let result = await conn.getquery(sql);
-
-    if (result.length > 0) {
-        res.status(200).json(result[0]);
+    console.log(result);
+    if (result.errno) {
+        res.status(200).json({ res: 'Vuelva intentarlo' });
     } else {
-        res.status(200).json({ res: 'Vuelva intentarlo' })
+        console.log("Entro");
+        res.status(200).json(result[0]);
     }
 }
 
