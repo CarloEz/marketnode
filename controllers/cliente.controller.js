@@ -46,9 +46,10 @@ ctrl.delete=async(req,res)=>{
 }
 
 ctrl.login=async(req,res)=>{
+    console.log(req.body);
     const sql=`Select Id_Cliente,NombreCliente, ApellidoCliente From Clientes WHERE CorreoCliente=\'${req.body.correo}\' && PasswordCliente=\'${req.body.pass}\'`
     let result=await conn.getquery(sql);
-    
+    console.log("Resyultado",result);
     if(result.length>0){    
         res.status(200).json(result[0]);
     }else{
